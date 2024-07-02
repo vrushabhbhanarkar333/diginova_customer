@@ -24,12 +24,13 @@ class _WrapperState extends State<Wrapper> {
             return const Center(child: CircularProgressIndicator());
           } else {
             if (snapshot.data == true) {
-              // return const QrScanner();
-              return const BottomNavigationBarScreen();
+              return const QrScanner();
+              // return const BottomNavigationBarScreen();
               //  BottomNavigationBarScreen();
             } else {
-              // return const LoginPage();
-              return const BottomNavigationBarScreen();
+              return const LoginPage();
+              // return const QrScanner();
+              // return const BottomNavigationBarScreen();
             }
           }
         },
