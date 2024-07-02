@@ -56,9 +56,11 @@ class _QrScannerState extends State<QrScanner> {
 
     // Attempt to post the project data
     UpdateDataModel? result = await projectController.updateQrData(qrCodeData);
+    // if (result != null) {
     if (qrCodeData != null) {
       // Navigate to the HomePage if successful
       _saveSelectedItem(qrCodeData);
+      // _saveSelectedItem(result as String);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -242,6 +244,7 @@ class _QrScannerState extends State<QrScanner> {
                                 setState(() {
                                   _selectedItem = value;
                                   if (_selectedItem != null) {
+                                    //  _saveSelectedItem('AAAAAA');
                                     _saveSelectedItem(_selectedItem!);
                                   }
                                 });
