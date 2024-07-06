@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:diginova/global/utility.dart';
 import 'package:diginova/screens/authentication/login_page.dart';
 import 'package:diginova/utils/bottom_nav_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../screens/qr_scan/qr_scan.dart';
+import 'package:diginova/screens/qr_scan/qr_scan.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
@@ -24,13 +23,9 @@ class _WrapperState extends State<Wrapper> {
             return const Center(child: CircularProgressIndicator());
           } else {
             if (snapshot.data == true) {
-              return const QrScanner();
-              // return const BottomNavigationBarScreen();
-              //  BottomNavigationBarScreen();
+              return QrScanner();
             } else {
               return const LoginPage();
-              // return const QrScanner();
-              // return const BottomNavigationBarScreen();
             }
           }
         },

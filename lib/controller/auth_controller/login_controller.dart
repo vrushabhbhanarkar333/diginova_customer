@@ -7,6 +7,7 @@ import 'package:diginova/global/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
   var email = "".obs;
@@ -52,23 +53,25 @@ class LoginController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        // String token = responseData['jwt_token'];
+        String token = responseData['jwt_token'];
         // String email = responseData['email'];
         // String name = responseData['name'];
         // // log(token, name: 'Token');
         // log('$name\n$email', name: 'Name and Email');
 
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // await prefs.setString('jwt_token', token);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('jwt_token', token);
         await UserDataManager.saveLoginInfo(
           responseData['jwt_token'],
           responseData['role'],
           responseData['name'],
           responseData['email'],
+          responseData['phoneNumber'],
           responseData['uid'],
           responseData['companyId'] ?? '',
           responseData['companyName'] ?? '',
           responseData['customerId'] ?? '',
+          responseData['projectId'] ?? '',
         );
 
         return true;

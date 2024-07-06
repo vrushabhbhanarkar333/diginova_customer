@@ -45,9 +45,10 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print('Project Id is : $_selectedProjectId');
     // setState(() {
-    _selectedProjectId = prefs.getString('selectedItem');
-    // _selectedProjectId = 'AAAA';
-    _customerId = prefs.getString('customerId');
+    // _selectedProjectId = prefs.getString('selectedItem');
+    _selectedProjectId = '65433';
+    // _customerId = prefs.getString('customerId');
+    _customerId = '54333';
     // });
   }
 
