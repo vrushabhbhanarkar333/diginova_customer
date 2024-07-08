@@ -61,7 +61,8 @@ class SignUpController extends GetxController {
     try {
       final signupResponse = await http
           .post(
-            Uri.parse('$BASE_URL$SIGNUP_URL'),
+            // Uri.parse('$BASE_URL$SIGNUP_URL'),
+            Uri.parse('http://10.0.2.2:8000/api/v1/customer/register'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -76,6 +77,9 @@ class SignUpController extends GetxController {
             }),
           )
           .timeout(const Duration(seconds: 10));
+
+      print(
+          'Signup response: ${signupResponse.statusCode} - ${signupResponse.body}');
 
       if (signupResponse.statusCode == 200) {
         Get.snackbar(
@@ -99,9 +103,11 @@ class SignUpController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       return false;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Signup error: $e');
+      print('Stack trace: $stackTrace');
       Get.snackbar(
-        'Sign Up Failed Error checking',
+        'Sign Up Failed',
         'Error: $e',
         snackPosition: SnackPosition.BOTTOM,
       );
@@ -124,7 +130,8 @@ class SignUpController extends GetxController {
     try {
       final verifyOtpResponse = await http
           .patch(
-            Uri.parse('$BASE_URL$VERIFY_OTP_URL'),
+            // Uri.parse('$BASE_URL$VERIFY_OTP_URL'),
+            Uri.parse('http://10.0.2.2:8000/api/v1/customer/verify-otp'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
@@ -134,6 +141,9 @@ class SignUpController extends GetxController {
             }),
           )
           .timeout(const Duration(seconds: 10));
+
+      print(
+          'Verify OTP response: ${verifyOtpResponse.statusCode} - ${verifyOtpResponse.body}');
 
       if (verifyOtpResponse.statusCode == 200) {
         Get.snackbar(
@@ -167,7 +177,9 @@ class SignUpController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       return false;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('OTP verification error: $e');
+      print('Stack trace: $stackTrace');
       Get.snackbar(
         'OTP Verification Failed',
         'Error: $e',
