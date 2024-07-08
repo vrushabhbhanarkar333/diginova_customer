@@ -530,6 +530,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 });
 
                                 try {
+                                  print(
+                                      'Attempting to sign up with formData: $formData'); // Debug statement
                                   final isSignUpSuccess =
                                       await signUpController.signupUser(
                                     formData['firstName']!,
@@ -549,11 +551,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                   if (isSignUpSuccess) {
                                     _showErrorDialog(
-                                      'Account created successfully',
-                                      true,
-                                    );
-
-                                    // Navigate based on the presence of a customer ID
+                                        'Account created successfully', true);
                                     if (_customerIdController.text.isEmpty) {
                                       Navigator.pushReplacement(
                                         context,
@@ -572,11 +570,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                     }
                                   } else {
                                     _showErrorDialog(
-                                      'Failed to create account. Please try again.',
-                                      false,
-                                    );
+                                        'Failed to create account. Please try again.',
+                                        false);
                                   }
                                 } catch (e) {
+                                  print(
+                                      'Error during sign up: $e'); // Debug statement
                                   _showErrorDialog('Error: $e', false);
                                 } finally {
                                   setState(() {
