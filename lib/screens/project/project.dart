@@ -1,3 +1,4 @@
+import 'package:diginova/bloc/bloc/project_bloc.dart';
 import 'package:diginova/controller/project_controller/project_controller.dart';
 import 'package:diginova/global/constant.dart';
 import 'package:diginova/screens/project/in_progress.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 // import 'project_ongoing.dart';
 

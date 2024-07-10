@@ -1,99 +1,142 @@
+import 'package:diginova/bloc/bloc/project_bloc.dart';
 import 'package:diginova/global/constant.dart';
 import 'package:diginova/screens/project/process_two.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FinishedScreen extends StatelessWidget {
+class FinishedScreen extends StatefulWidget {
   const FinishedScreen({super.key});
 
   @override
+  State<FinishedScreen> createState() => _FinishedScreenState();
+}
+
+class _FinishedScreenState extends State<FinishedScreen> {
+  @override
+  void initState() {
+    context.read<ProjectBloc>().add(FetchFinishedProjectsEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProcessTwo()));
-      },
-      child: Card(
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: SELECTED_ICON_CLR),
-          height: 150,
-          width: 70,
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20),
-                    child: Text(
-                      'Work Completed',
-                      style: GoogleFonts.poppins(
-                        fontSize: FONT_SM,
-                        fontWeight: FontWeight.w600,
-                        color: WHITE_CLR,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 5),
-                    child: Text(
-                      'Purchase',
-                      style: GoogleFonts.poppins(
-                        fontSize: FONT_SM,
-                        fontWeight: FontWeight.normal,
-                        color: WHITE_CLR,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 20.0, top: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Image.asset(
-                          'assets/images/ProfileImage.png',
-                        ),
-                        Positioned(
-                          left: 28,
-                          child: Image.asset(
-                            'assets/images/ProfileImage.png',
+    return BlocConsumer<ProjectBloc, ProjectState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+         if (state is ProjectLoading) {
+          return Center(child:  
+           CircularProgressIndicator(),);
+        }
+     else   if (state is FetechProjectFinishedSuccefulState) {
+          print("finished project = ${state.inProgressProjects}");
+          return SizedBox(
+            height: MediaQuery.sizeOf(context).height,
+            child: Expanded(
+              child: ListView.builder(
+                  itemCount: state.inProgressProjects.length,
+                  itemBuilder: (context, index) {
+                    final projectDetails = state.inProgressProjects[index];
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FinishedProjectDetails(
+                                      projectDetails: projectDetails,
+                                    )));
+                      },
+                      child: Card(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: SELECTED_ICON_CLR),
+                          height: 150,
+                          width: 70,
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 20),
+                                    child: Text(
+                                      'Work Completed',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: FONT_SM,
+                                        fontWeight: FontWeight.w600,
+                                        color: WHITE_CLR,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 20, top: 5),
+                                    child: Text(
+                                      projectDetails.projectName!,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: FONT_SM,
+                                        fontWeight: FontWeight.normal,
+                                        color: WHITE_CLR,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 20.0, top: 10.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/ProfileImage.png',
+                                        ),
+                                        Positioned(
+                                          left: 28,
+                                          child: Image.asset(
+                                            'assets/images/ProfileImage.png',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 40),
+                                      child: Text(
+                                        'Work by Username. ',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: FONT_SM,
+                                          fontWeight: FontWeight.normal,
+                                          color: WHITE_CLR,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: Text(
-                        'Work by Username. ',
-                        style: GoogleFonts.poppins(
-                          fontSize: FONT_SM,
-                          fontWeight: FontWeight.normal,
-                          color: WHITE_CLR,
-                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                    );
+                  }),
+            ),
+          );
+        } else {
+          return Center(child: Text("No finished Projects"));
+        }
+      },
     );
 // =======
 // <<<<<<< manoj_work

@@ -50,7 +50,8 @@ class LoginController extends GetxController {
           .timeout(Duration(seconds: 10), onTimeout: () {
         throw 'Please try again';
       });
-
+       debugPrint("login response statuscode = ${response.statusCode}");
+       debugPrint("login response body = ${response.body}");
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         String token = responseData['jwt_token'];
@@ -71,7 +72,7 @@ class LoginController extends GetxController {
           responseData['companyId'] ?? '',
           responseData['companyName'] ?? '',
           responseData['customerId'] ?? '',
-          responseData['projectId'] ?? '',
+          
         );
 
         return true;

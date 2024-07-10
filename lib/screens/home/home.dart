@@ -46,9 +46,9 @@ class _HomePageState extends State<HomePage> {
     print('Project Id is : $_selectedProjectId');
     // setState(() {
     // _selectedProjectId = prefs.getString('selectedItem');
-    _selectedProjectId = '65433';
+    _selectedProjectId = '22222';
     // _customerId = prefs.getString('customerId');
-    _customerId = '54333';
+    _customerId = '1155';
     // });
   }
 

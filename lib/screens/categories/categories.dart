@@ -1,5 +1,6 @@
 import 'package:diginova/screens/files/file.dart';
 import 'package:diginova/screens/help_desk/help.dart';
+import 'package:diginova/screens/project/project.dart';
 import 'package:flutter/material.dart';
 import 'package:diginova/global/appbar.dart';
 import 'package:diginova/global/constant.dart';
@@ -74,7 +75,7 @@ class _CategoriesState extends State<Categories> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ProcessTwo(),
+                            builder: (context) => const ProjectScreen(),
                           ),
                         );
                       },

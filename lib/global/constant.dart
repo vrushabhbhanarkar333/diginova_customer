@@ -5,10 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 
 // String BASE_URL = 'https://diginova-back.onrender.com/api/v1/api-docs/';
-String BASE_URL = 'http://localhost:8000/api/v1/';
+String BASE_URL = 'https://diginova-back-wvgk.onrender.com/api/v1/';
 // String BASE_URL = 'http://localhost:8000/api/v1/';
 String IMAGE_BASE_URL = 'https://digi-iot.s3.ap-south-1.amazonaws.com/images/';
-String LOGIN_URL = 'customer/login';
+String LOGIN_URL = 'auth/customer/login';
 String SIGNUP_URL = 'customer/register';
 String SEND_OTP_URL = 'customer/send-otp';
 String VERIFY_OTP_URL = 'customer/verify-otp';

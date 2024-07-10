@@ -1,10 +1,13 @@
+import 'package:diginova/bloc/bloc/project_bloc.dart';
 import 'package:diginova/firebase.options.dart';
 import 'package:diginova/global/constant.dart';
 import 'package:diginova/global/wrapper.dart';
 import 'package:diginova/provider/raise_ticket.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/chat.dart';
@@ -41,25 +44,30 @@ void main() async {
   // FlutterNativeSplash.remove(); // Remove splash screen immediately
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ProjectDetailsProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => TicketProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MyDetailsProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ServiceBookingProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ChatProvider(),
-        ),
+    MultiBlocProvider(
+      providers: [ 
+        BlocProvider(create: (context)=>ProjectBloc())
       ],
-      child: const MyApp(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => ProjectDetailsProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => TicketProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => MyDetailsProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ServiceBookingProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => ChatProvider(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
     ),
   );
 }

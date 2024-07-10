@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:diginova/controller/project_controller.dart';
 import 'package:diginova/global/constant.dart';
+import 'package:diginova/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class QrScanner extends StatefulWidget {
 
 class _QrScannerState extends State<QrScanner> {
   final ProjectController projectController = Get.put(ProjectController());
-
+ final projectIdController = TextEditingController();
   String? _selectedItem;
 
   @override
@@ -250,8 +251,12 @@ class _QrScannerState extends State<QrScanner> {
                                 });
                               },
                             );
+                            
                           },
                         ),
+                      ),
+                      TextFormField(controller:projectIdController ,
+                      decoration: InputDecoration(labelText: "Project Id"),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
@@ -273,6 +278,9 @@ class _QrScannerState extends State<QrScanner> {
                             ),
                           ),
                           onPressed: () {
+                            if (projectIdController.text == "22222") {
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=>HomePage()));
+                            }
                             if (_selectedItem != null) {
                               var responseData = projectController.responseData;
                               Navigator.push(

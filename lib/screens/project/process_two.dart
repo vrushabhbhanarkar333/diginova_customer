@@ -1,18 +1,20 @@
 import 'package:diginova/global/appbar.dart';
 import 'package:diginova/global/constant.dart';
+import 'package:diginova/model/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class ProcessTwo extends StatefulWidget {
-  const ProcessTwo({super.key});
+class FinishedProjectDetails extends StatefulWidget {
+  final ProjectDetails projectDetails;
+  const FinishedProjectDetails({super.key, required this.projectDetails});
 
   @override
-  State<ProcessTwo> createState() => _ProcessTwoState();
+  State<FinishedProjectDetails> createState() => _FinishedProjectDetailsState();
 }
 
-class _ProcessTwoState extends State<ProcessTwo> {
+class _FinishedProjectDetailsState extends State<FinishedProjectDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,7 +183,7 @@ class _ProcessTwoState extends State<ProcessTwo> {
                               ),
                             ),
                             Text(
-                              'Purchased and site visit advance payment , these process are completed ',
+                              widget.projectDetails.projectDescription!,
                               style: GoogleFonts.poppins(
                                 fontSize: FONT_XSS,
                                 fontWeight: FontWeight.w500,

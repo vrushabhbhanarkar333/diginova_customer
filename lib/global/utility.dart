@@ -13,7 +13,6 @@ class UserDataManager {
   static const String companyIdKey = 'companyId';
   static const String companyNameKey = 'companyName';
   static const String customerIdKey = 'customerId';
-  static const String projectIdKey = 'projectId';
 
   static Future<void> saveLoginInfo(
       String jwtToken,
@@ -25,7 +24,7 @@ class UserDataManager {
       String companyId,
       String companyName,
       String customerId,
-      String projectId) async {
+      ) async {
     Map<String, String> userData = {
       jwtTokenKey: jwtToken,
       roleKey: role,
@@ -36,7 +35,6 @@ class UserDataManager {
       companyIdKey: companyId,
       companyNameKey: companyName,
       customerIdKey: customerId,
-      projectIdKey: projectId
     };
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,7 +56,6 @@ class UserDataManager {
       'companyId': prefs.getString(companyIdKey) ?? '',
       'companyName': prefs.getString(companyNameKey) ?? '',
       'customerId': prefs.getString(customerIdKey) ?? '',
-      'projectId': prefs.getString(projectIdKey) ?? '',
     };
   }
 
@@ -72,6 +69,5 @@ class UserDataManager {
     await prefs.remove(uidKey);
     await prefs.remove(companyIdKey);
     await prefs.remove(customerIdKey);
-    await prefs.remove(projectIdKey);
   }
 }
