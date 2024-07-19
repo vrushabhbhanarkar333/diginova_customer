@@ -128,19 +128,17 @@ class SignUpController extends GetxController {
 
     // Verify OTP
     try {
-      final verifyOtpResponse = await http
-          .patch(
-            // Uri.parse('$BASE_URL$VERIFY_OTP_URL'),
-            Uri.parse('http://10.0.2.2:8000/api/v1/customer/verify-otp'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'email': email,
-              'otp': otpInput,
-            }),
-          )
-          .timeout(const Duration(seconds: 10));
+      final verifyOtpResponse = await http.patch(
+        // Uri.parse('$BASE_URL$VERIFY_OTP_URL'),
+        Uri.parse('http://10.0.2.2:8000/api/v1/customer/verify-otp'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'otp': otpInput,
+        }),
+      );
 
       print(
           'Verify OTP response: ${verifyOtpResponse.statusCode} - ${verifyOtpResponse.body}');

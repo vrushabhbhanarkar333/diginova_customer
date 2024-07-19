@@ -54,10 +54,6 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         String token = responseData['jwt_token'];
-        // String email = responseData['email'];
-        // String name = responseData['name'];
-        // // log(token, name: 'Token');
-        // log('$name\n$email', name: 'Name and Email');
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('jwt_token', token);
